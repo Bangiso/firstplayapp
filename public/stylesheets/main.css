@@ -1,0 +1,115 @@
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+fieldset{
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 2px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    padding: 0 .625em;
+}
+
+label{
+    cursor: pointer;
+    display: inline-block;
+    padding: 3px 6px;
+    text-align: right;
+    width: 150px;
+    vertical-align: top;
+}
+
+input{
+    font-size: inherit;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 5px;
+  row-gap: 5px;
+  grid-gap: 5px;
+}
+
+.box {
+  box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12)
+;
+
+  min-height: 200px;
+  width: 20vw;
+  text-align: center;
+  font-size: 30px;
+  margin: 5px auto;
+  background: white;
+  border-radius: 5px;
+}
+
+
+body {
+  background: #EEF2F7;
+}
+
+.dispace {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.formDiv{
+    border-radius: 10px;
+    box-shadow:   0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+                  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+                  0 12.5px 10px rgba(0, 0, 0, 0.06),
+                  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+                  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+                  0 100px 80px rgba(0, 0, 0, 0.12)
+                ;
+}
+
+.searchB{
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+
+.button{
+  border-radius: 4px;
+  font-size: 16px;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+

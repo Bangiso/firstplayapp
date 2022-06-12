@@ -6,7 +6,7 @@ import play.api.db.{Database, NamedDatabase}
 import models.Student
 import services.StudentsService
 
-import java.sql.Connection
+import java.sql.{Connection, SQLIntegrityConstraintViolationException}
 
 class StudentsDao @Inject()(
                              @NamedDatabase("students") db: Database

@@ -8,6 +8,7 @@ import play.api.test._
 import play.api.test.Helpers._
 import services.StudentsService
 import org.scalatestplus.mockito.MockitoSugar.mock
+import play.api.Play.materializer
 
 class StudentsControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecting {
 
