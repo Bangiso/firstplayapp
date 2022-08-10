@@ -4,13 +4,19 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index()
 GET     /api/ping                   controllers.HealthCheckController.healthCheck
+
+GET     /                           controllers.StudentsController.getAll
 GET     /api/students               controllers.StudentsController.fetchStudents
 GET     /api/students/:id           controllers.StudentsController.fetchStudentById(id: Long)
-
++nocsrf
 POST     /api/students              controllers.StudentsController.saveStudent
++nocsrf
+GET     /api/add-students           controllers.StudentsController.createStudentForm
++nocsrf
+POST     /api/search-results        controllers.StudentsController.search
 PUT      /api/students              controllers.StudentsController.updateStudent
++nocsrf
 DELETE   /api/students/:id          controllers.StudentsController.deleteStudent(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path

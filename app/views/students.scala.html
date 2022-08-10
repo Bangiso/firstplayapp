@@ -1,0 +1,47 @@
+@(students: List[models.Student])
+@main("List of Students"){
+
+    @if(!students.isEmpty){
+
+    <div class="text-center">
+        <h1 class="display-4">List of Students</h1>
+        <table class ="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>GPA</th>
+                <th>
+                    Action
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @for(student <- students) {
+            <tr>
+                <td>
+                    @student.id
+                </td>
+                <td>
+                    @student.name
+                </td>
+                <td>
+                    @student.gpa
+                </td>
+                <td>
+                    <a href="@routes.StudentsController.fetchStudentById(student.id)">Details</a>
+                </td>
+                <td>
+                    <form action="@routes.StudentsController.deleteStudent(student.id)" method="delete">
+                        <button type="submit" value="Submit">Delete</button>
+                    </form >
+                </td>
+            </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    } else{
+        <p>No students</p>
+    }
+}

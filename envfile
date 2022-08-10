@@ -1,0 +1,4 @@
+DATABASE_URL=jdbc:mysql://localhost/StudentDB
+MYSQL_SVC_SERVICE_HOST=localhost
+MYSQL_ROOT_USERNAME=root
+MYSQL_ROOT_PASSWORD=test1234

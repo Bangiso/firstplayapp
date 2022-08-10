@@ -1,0 +1,44 @@
+@(student: models.Student, studentForm: play.api.data.Form[models.Student])(implicit request: RequestHeader, messagesProvider: MessagesProvider)
+@main("Student") {
+<div class="text-center">
+    <h1 class="display-4">Student</h1>
+    <table class ="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>GPA</th>
+            <th>
+                Pass/Fail
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                @student.id
+            </td>
+            <td>
+                @student.name
+            </td>
+            <td>
+                @student.gpa
+            </td>
+            <td>
+
+            @{
+                if(student.gpa>=50){
+                    "Pass"
+                }
+                else{
+                    "Fail"
+                }
+            }
+        </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+}
