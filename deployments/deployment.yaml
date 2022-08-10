@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: first-play-app
+spec:
+  selector:
+    matchLabels:
+      app: first-play-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: first-play-app
+    spec:
+      containers:
+        - image: aphiwe2020/first-play-app:1.0.35
+          name: first-play-app
+          env:
+            - name: DATABASE_URL
+              value: jdbc:mysql://mysql-svc.default.svc.cluster.local/StudentDB
+            - name: MYSQL_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+          ports:
+            - containerPort: 9000
+              name: first-play-app
+          livenessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            exec:
+              command:
+                - cat
+                - logs/application.log
+          readinessProbe:
+            initialDelaySeconds: 4
+            periodSeconds: 5
+            successThreshold: 3
+            exec:
+              command:
+                - cat
+                - logs/application.log
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: first-play-app-svc
+spec:
+  ports:
+    - port: 9000
+      targetPort: 9000
+  selector:
+    app: first-play-app
+  externalTrafficPolicy: Local
+  type: LoadBalancer

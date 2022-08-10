@@ -16,6 +16,7 @@ GET     /api/add-students           controllers.StudentsController.createStudent
 +nocsrf
 POST     /api/search-results        controllers.StudentsController.search
 PUT      /api/students              controllers.StudentsController.updateStudent
++nocsrf
 DELETE   /api/students/:id          controllers.StudentsController.deleteStudent(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
