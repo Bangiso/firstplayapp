@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.docker.DockerPermissionStrategy
 name := """firstPlayApp"""
 organization := "com.aphiwe"
 
-version := "1.0.28-SNAPSHOT"
+version := "1.0.37-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
