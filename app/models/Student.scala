@@ -6,7 +6,7 @@ import play.api.data.format.Formats.doubleFormat
 import play.api.libs.json._
 
 case class Student(
-                    id: Long,
+                    id: Option[Long],
                     name: String,
                     gpa: Double
                   )
@@ -16,7 +16,7 @@ object Student{
 
   val studentForm = Form(
     mapping(
-      "id"  -> longNumber,
+      "id"  -> optional(longNumber),
       "name" -> text,
       "gpa" ->  of(doubleFormat)
     )(Student.apply)(Student.unapply)
