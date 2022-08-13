@@ -40,8 +40,8 @@ spec:
                 - cat
                 - logs/application.log
           readinessProbe:
-            initialDelaySeconds: 4
-            periodSeconds: 5
+            initialDelaySeconds: 10
+            periodSeconds: 10
             successThreshold: 3
             exec:
               command:
