@@ -22,7 +22,7 @@ class StudentsController @Inject()(
   def fetchStudentById(id: Option[Long]): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     studentsService.fetchStudentById(id.get) match {
       case Some(student) => Ok(views.html.studentById(student, studentForm))
-      case None => Ok(views.html.error(s"No student found with id = $id"))
+      case None => Ok(views.html.error(s"No student found with id = ${id.get}"))
     }
   }
 
@@ -44,7 +44,7 @@ class StudentsController @Inject()(
           Redirect(routes.StudentsController.fetchStudents)
         }
         catch {
-          case _: SQLIntegrityConstraintViolationException => Conflict(views.html.error(s"Student with id = ${newStudent.id} already exists"))
+          case _: SQLIntegrityConstraintViolationException => Conflict(views.html.error(s"Student with id = ${newStudent.id.get} already exists"))
         }
     }
   }
