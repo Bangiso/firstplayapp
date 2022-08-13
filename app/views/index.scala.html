@@ -6,19 +6,30 @@
     <p> Welcome to my first scala play web application</a>.</p>
   </div>
 
+@if(!students.isEmpty){
   <div class="wrapper">
-    @for(student <- students){
-    <a style="color:inherit;text-decoration:none" href="@routes.StudentsController.fetchStudentById(student.id)">
-      <div class="box">
-        <p>
-          <b> Id:</b>  @student.id
-        </p>
-        <p>
-          <b> Name : </b> @student.name
-        </p>
-      </div>
-    </a>
-    }
-  </div>
-
+      @for(student <- students){
+        <div class="box">
+            <div>
+                <a style="color:inherit;text-decoration:none" href="@routes.StudentsController.fetchStudentById(student.id)">
+                  <p>
+                    <b> Id:</b>  @student.id.get
+                  </p>
+                  <p>
+                    <b> Name : </b> @student.name
+                  </p>
+                </a>
+            </div>
+            <div class="dispace">
+                <div></div>
+                <div>
+                    <button><a style="color:inherit;text-decoration:none" href="@routes.StudentsController.updateStudent(student.id)">Edit</a></button>
+                </div>
+            </div>
+        </div>
+      }
+    </div>
+ } else{
+    <div class="text-center"> <p>No students found</p> </div>
+  }
 }

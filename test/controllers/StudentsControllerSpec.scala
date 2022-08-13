@@ -18,7 +18,7 @@ class StudentsControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injec
       val studentsService  = mock[StudentsService]
 
       when(studentsService.fetchStudents()).thenReturn(List(
-        new Student(1, "Sam", 78.8),
+        new Student(Some(1), "Sam", 78.8),
       ))
 
 
@@ -42,12 +42,12 @@ class StudentsControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injec
       val studentsService  = mock[StudentsService]
 
       when(studentsService.fetchStudentById(2)).thenReturn(Some(
-        new Student(2, "Will", 87.4)
+        new Student(Some(2), "Will", 87.4)
       ))
 
 
       val controller = new StudentsController(studentsService,stubControllerComponents())
-      val home = controller.fetchStudentById(2).apply(FakeRequest(GET, "/api/students/2"))
+      val home = controller.fetchStudentById(Some(2)).apply(FakeRequest(GET, "/api/students/2"))
 
       status(home) mustBe OK
       contentType(home) mustBe Some("application/json")
@@ -60,7 +60,7 @@ class StudentsControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injec
       when(studentsService.fetchStudentById(4)).thenReturn(None)
 
       val controller = new StudentsController(studentsService,stubControllerComponents())
-      val home = controller.fetchStudentById(4).apply(FakeRequest(GET, "/api/students/4"))
+      val home = controller.fetchStudentById(Some(4)).apply(FakeRequest(GET, "/api/students/4"))
 
       status(home) mustBe NOT_FOUND
       contentType(home) mustBe Some("text/plain")

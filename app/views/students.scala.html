@@ -2,7 +2,6 @@
 @main("List of Students"){
 
     @if(!students.isEmpty){
-
     <div class="text-center">
         <h1 class="display-4">List of Students</h1>
         <table class ="table">
@@ -11,9 +10,6 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>GPA</th>
-                <th>
-                    Action
-                </th>
             </tr>
             </thead>
             <tbody>
@@ -29,12 +25,23 @@
                     @student.gpa
                 </td>
                 <td>
-                    <a href="@routes.StudentsController.fetchStudentById(student.id)">Details</a>
-                </td>
-                <td>
-                    <form action="@routes.StudentsController.deleteStudent(student.id)" method="delete">
-                        <button type="submit" value="Submit">Delete</button>
-                    </form >
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <button> <a style="color:inherit;text-decoration:none" href="@routes.StudentsController.fetchStudentById(student.id)">Details</a>  </button>
+                                </td>
+                                <td>
+                                    <button> <a style="color:inherit;text-decoration:none" href="@routes.StudentsController.updateStudent(student.id)">Edit</a> </button>
+                                </td>
+                                <td>
+                                    <form action="@routes.StudentsController.deleteStudent(student.id)" method="post">
+                                        <button type="submit" value="Submit">Delete</button>
+                                    </form >
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </td>
             </tr>
             }
@@ -42,6 +49,6 @@
         </table>
     </div>
     } else{
-        <p>No students</p>
+        <div class="text-center"> <p>No students</p> </div>
     }
 }

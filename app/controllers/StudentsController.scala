@@ -1,7 +1,6 @@
 package controllers
 
 import models.Search.searchForm
-import models.Student
 
 import javax.inject._
 import play.api.mvc._
@@ -20,24 +19,34 @@ class StudentsController @Inject()(
     Ok(views.html.students(studentsService.fetchStudents()))
   }
 
-  def fetchStudentById(id: Long): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    studentsService.fetchStudentById(id) match {
+  def fetchStudentById(id: Option[Long]): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    studentsService.fetchStudentById(id.get) match {
       case Some(student) => Ok(views.html.studentById(student, studentForm))
-      case None => NotFound(s"No student found with id = $id")
+      case None => Ok(views.html.error(s"No student found with id = ${id.get}"))
     }
   }
 
-  def saveStudent() = Action(parse.form(studentForm)) { implicit request =>
+  def saveStudent(isEdit: Boolean, id: Option[Long]=None) = Action(parse.form(studentForm)) { implicit request =>
     val studentData = request.body
-    val newStudent = models.Student(studentData.id, studentData.name, studentData.gpa)
-    try {
-      studentsService.saveStudent(newStudent)
-      Redirect(routes.StudentsController.fetchStudents)
-    }
-    catch {
-      case _: SQLIntegrityConstraintViolationException => Conflict(views.html.error(s"Student with id = ${newStudent.id} already exists"))
+    val newStudent = if(studentData.id.isDefined){
+      models.Student(studentData.id, studentData.name, studentData.gpa)
+    } else{
+      models.Student(id, studentData.name, studentData.gpa)
     }
 
+
+    if(isEdit){
+      studentsService.updateStudent(newStudent)
+      Redirect(routes.StudentsController.fetchStudentById(newStudent.id))
+    } else {
+        try {
+          studentsService.saveStudent(newStudent)
+          Redirect(routes.StudentsController.fetchStudents)
+        }
+        catch {
+          case _: SQLIntegrityConstraintViolationException => Conflict(views.html.error(s"Student with id = ${newStudent.id.get} already exists"))
+        }
+    }
   }
 
   def search() = Action(parse.form(searchForm)) { implicit request =>
@@ -59,24 +68,18 @@ class StudentsController @Inject()(
   }
 
 
-  def updateStudent() = Action { request =>
-    val requestBody = request.body.asJson.get
-    val student = requestBody.as[Student]
-    studentsService.updateStudent(student)
-    Ok("")
+  def updateStudent(id: Option[Long]) = Action { implicit request =>
+    val student = studentsService.fetchStudentById(id.get).get
+    Ok(views.html.editStudent(student,studentForm))
   }
 
-  def deleteStudent(id: Long) = Action { implicit request: Request[AnyContent] =>
-    studentsService.deleteStudent(id)
-    Ok("")
+  def deleteStudent(id: Option[Long]): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    studentsService.deleteStudent(id.get)
+    Ok(views.html.error(s"Successfully deleted student with id ${id.get}"))
   }
 
   def getAll(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val students = studentsService.fetchStudents()
-    if (students.isEmpty) {
-      NotFound("No students found")
-    } else {
-      Ok(views.html.index(students))
-    }
+    Ok(views.html.index(students))
   }
 }

@@ -14,7 +14,7 @@ spec:
         app: first-play-app
     spec:
       containers:
-        - image: aphiwe2020/first-play-app:1.0.35
+        - image: aphiwe2020/first-play-app:1.0.37
           name: first-play-app
           env:
             - name: DATABASE_URL

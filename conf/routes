@@ -8,16 +8,16 @@ GET     /api/ping                   controllers.HealthCheckController.healthChec
 
 GET     /                           controllers.StudentsController.getAll
 GET     /api/students               controllers.StudentsController.fetchStudents
-GET     /api/students/:id           controllers.StudentsController.fetchStudentById(id: Long)
+GET     /api/student-details               controllers.StudentsController.fetchStudentById(id: Option[Long]?=None)
 +nocsrf
-POST     /api/students              controllers.StudentsController.saveStudent
+POST     /api/students              controllers.StudentsController.saveStudent(isEdit: Boolean, id: Option[Long]?=None)
 +nocsrf
 GET     /api/add-students           controllers.StudentsController.createStudentForm
 +nocsrf
 POST     /api/search-results        controllers.StudentsController.search
-PUT      /api/students              controllers.StudentsController.updateStudent
+GET      /api/edit-students    controllers.StudentsController.updateStudent(id: Option[Long]?=None)
 +nocsrf
-DELETE   /api/students/:id          controllers.StudentsController.deleteStudent(id: Long)
+POST   /api/remove-student       controllers.StudentsController.deleteStudent(id: Option[Long]?=None)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

@@ -1,9 +1,9 @@
 @(studentForm: play.api.data.Form[models.Student])(implicit request: RequestHeader, messagesProvider: MessagesProvider)
 @main("Create Student"){
     <h1>Create Student</h1>
-<div class="row">
+    <div class="row">
     <div class="col-md-4 formDiv">
-        <form action="@routes.StudentsController.saveStudent" method="post">
+        <form action="@routes.StudentsController.saveStudent(false)" method="post">
             <fieldset>
                 <legend></legend>
                 <div>
@@ -25,5 +25,5 @@
             </fieldset>
         </form>
     </div>
-</div>
+    </div>
 }
